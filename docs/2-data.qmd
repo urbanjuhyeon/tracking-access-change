@@ -56,7 +56,7 @@ Preparing GTFS for r5r routing involves three steps:
 
 The Korea Transport Database ([KTDB](https://www.ktdb.go.kr/)) provides national GTFS covering all transit modes (buses, urban rail, intercity, KTX, ferries). KTDB releases annual snapshots based on a typical March weekday. Historical data became available in November 2023; as of December 2025, feeds cover 2021–2024.
 
-To download, go to 정보공개 (Information Disclosure) → 자료신청 (Data Request) → 교통분석데이터 (transport-analysis data). In the selection form, pick 네트워크 → 대중교통 (Network → Public transit) under Step 1, 전국 (nationwide) under Step 2, and the distribution year under Step 3; the public-transit network is what KTDB distributes as GTFS. The site is Korean only, and a browser translator is enough to complete the request form.
+To download, go to Information Disclosure → Data Request → Transport Analysis Data. In the selection form, pick Network → Public transit under Step 1, Nationwide under Step 2, and the distribution year under Step 3; the public-transit network is what KTDB distributes as GTFS. The site is Korean only, so use a browser translator to match these menu names and complete the request form.
 :::
 
 ### Clean
@@ -405,7 +405,7 @@ Census units are a practical choice. They come with population counts, so you ca
 ::: {.callout-note collapse="true"}
 ## South Korea: Census Units
 
-South Korea's administrative hierarchy is 시도 (province) → 시군구 (municipality, ~250) → 읍면동 (neighborhood, ~3,500). For finer resolution, the statistics agency provides 집계구 (enumeration districts, ~100,000): not administrative units but statistical areas designed for census aggregation.
+South Korea's administrative hierarchy runs from province (sido) to municipality (sigungu, ~250) to neighborhood (eupmyeondong, ~3,500). For finer resolution, the statistics agency provides enumeration districts (jipgyegu, ~100,000): not administrative units but statistical areas designed for census aggregation.
 
 Boundaries and population: [SGIS](https://sgis.kostat.go.kr/) (free, registration required).
 :::

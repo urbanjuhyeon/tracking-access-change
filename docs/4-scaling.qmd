@@ -482,12 +482,12 @@ head(destinations_df, 5)
 ```
 
 ```
-  id   bank_name  branch_name      lon      lat
-1  1 BNK경남은행         거창 127.9065 35.68861
-2  2 BNK경남은행         구영 129.2424 35.57147
-3  3 BNK경남은행 굴화금융센터 129.2649 35.55462
-4  4 BNK경남은행         남목 129.4238 35.53925
-5  5 BNK경남은행       남진주 128.0912 35.17945
+  id           bank_name branch_name      lon      lat
+1  1 BNK Gyeongnam Bank    Geochang 127.9065 35.68861
+2  2 BNK Gyeongnam Bank     Guyeong 129.2424 35.57147
+3  3 BNK Gyeongnam Bank  Gulhwa Ctr 129.2649 35.55462
+4  4 BNK Gyeongnam Bank      Nammok 129.4238 35.53925
+5  5 BNK Gyeongnam Bank    Namjinju 128.0912 35.17945
 ```
 
 - `lon`, `lat`: WGS84 coordinates for routing
