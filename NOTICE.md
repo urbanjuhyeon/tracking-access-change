@@ -38,7 +38,7 @@ example above reproduces the workflow end to end without them.
 | Source | Role | Why not redistributed | How to obtain |
 |---|---|---|---|
 | KTDB national GTFS | Transit networks | Provider terms; redistribution not confirmed | KTDB data request (see `docs/2-data.qmd`) |
-| SGIS census boundaries and population | Origins | Open-license type not yet confirmed | SGIS portal |
+| SGIS census boundaries and population | Origins | Not bundled here; the release ships the synthetic example instead. SGIS content marked 공공누리 (KOGL) Type 1 is redistributable with attribution | SGIS portal |
 | Korea Federation of Banks branch status | Destinations | Private association; site asserts all rights reserved | KFB 공시·자료실 › 자료실 › 기타자료 |
 | Gyeonggi Data Dream restaurants | Validation destinations | Open-license type not yet confirmed | Gyeonggi Data Dream portal |
 | Geocoded branch coordinates | Destination coordinates | Derived via commercial geocoders (Naver Cloud Platform, Kakao, Google) whose terms restrict storage and redistribution | Re-geocode the addresses under a redistribution-permitting service |
