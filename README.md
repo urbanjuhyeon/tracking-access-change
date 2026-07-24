@@ -5,7 +5,7 @@ and public transit, using [r5r](https://ipeagit.github.io/r5r/), GTFS, and OpenS
 The companion book documents the workflow step by step; the scripts implement the full
 pipeline behind a study of bank-branch accessibility decline in South Korea (2021–2024).
 
-**Read the book:** <https://urbanjuhyeon.github.io/tracking-access-change/>
+**Read the book:** <https://juhyeonpark.com/tracking-access-change/>
 
 ## Repository layout
 
@@ -30,7 +30,7 @@ python samples/tutorial-synthetic/generate_fixture.py
 Rscript samples/tutorial-synthetic/run_example.R
 ```
 
-Then follow the book from [Data Preparation](https://urbanjuhyeon.github.io/tracking-access-change/2-data.html)
+Then follow the book from [Data Preparation](https://juhyeonpark.com/tracking-access-change/2-data.html)
 onward to build the same workflow for your own study area.
 
 ## Data availability
