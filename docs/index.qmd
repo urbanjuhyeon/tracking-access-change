@@ -1,0 +1,23 @@
+# Preface {.unnumbered}
+
+This project began with a closure notice at a neighborhood bank ([see photo](assets/figures/image/closure_my_photo.png){.hover-image target="_blank" style="--hover-img: url('assets/figures/image/closure_my_photo.png')"}).
+
+The branch had been there for years. When it closed, the notice directed customers to the branch it had merged with, about ten minutes away on foot. A direct bus existed, but the connection was not obvious, and for someone less mobile, that journey would be a real barrier.
+
+At first, I thought this was a local inconvenience. Then I looked into it. South Korea's bank branches have been [declining for **six consecutive years**](https://www.koreaherald.com/article/10497026), down to 5,792 by the end of 2024, and the five largest banks closed another 76 in the first quarter of 2025 alone. This was not a neighborhood problem; it was a national pattern.
+
+That raised questions I could not easily answer. As branches disappear over time, **where does accessibility decline the most?** Are certain kinds of areas disproportionately affected, such as rural regions, lower-income neighborhoods, or aging communities? And how different is the picture for those who drive versus those who rely on public transit?
+
+Most accessibility research captures a single point in time or focuses on one transport mode. When I went looking for methods to answer these questions, I found that longitudinal, multimodal analysis remains rare.
+
+So I built a workflow to fill that gap, and later wrote a paper that asks what caused the decline the workflow measures.
+
+## What This Book Offers
+
+This book is the **reproducibility companion** to that research. It documents an open-source workflow for measuring **how accessibility changes over time**, for both car and public transit, using r5r, GTFS, and OpenStreetMap.
+
+Its purpose is to make the routing and scaling layers inspectable and adaptable, so the same steps can be rerun for other services, regions, or years. The attribution and policy argument belongs to the companion paper, which extends the workflow from measurement to explanation by decomposing observed change into service and network drivers. The closing section of this book (@sec-beyond) outlines that extension and points to the scripts.
+
+## Who This Book Is For
+
+This book is for urban researchers, transport planners, and spatial analysts who want to measure how accessibility changes over time. Whether you are studying service closures or new transit lines, the methods here offer a starting point.

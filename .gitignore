@@ -1,0 +1,34 @@
+# Local data and outputs — never committed to the public repository
+/data/
+/workflows/
+/output/
+/figures/
+/tmp/
+manuscript/
+infrastructure/
+
+# Quarto build outputs and caches
+/.quarto/
+docs/_book/
+docs/.quarto/
+*_files/
+
+# R / RStudio
+.Rproj.user/
+.Rhistory
+.RData
+.Ruserdata
+rosm.cache/
+
+# Python
+__pycache__/
+
+# Environment and secrets
+.env
+.env.*
+!.env.example
+
+# Local-only trees
+.claude/
+**/archives/
+**/scratch/

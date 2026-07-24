@@ -1,0 +1,74 @@
+{
+  "fixture_id": "fictional-grid-v1",
+  "title": "Fictional Grid Accessibility Fixture",
+  "license": "CC0-1.0",
+  "coordinate_reference_system": "EPSG:4326",
+  "coordinate_note": "Synthetic coordinates chosen only to create a compact network at realistic scale; they do not represent real facilities or observations.",
+  "grid": {
+    "rows": 7,
+    "columns": 7,
+    "base_lat": 37.0000,
+    "base_lon": 127.0000,
+    "spacing_degrees": 0.0010,
+    "way_tags": {
+      "highway": "residential",
+      "maxspeed": "30",
+      "access": "yes",
+      "motor_vehicle": "yes",
+      "foot": "yes",
+      "bicycle": "yes"
+    },
+    "rationale": "R5 prunes connected street components with fewer than 40 vertices; a 7 by 7 grid supplies 49 connected vertices."
+  },
+  "origins": [
+    {"id": "O_WEST", "population": 100, "lon": 127.0000, "lat": 37.0000},
+    {"id": "O_NORTH", "population": 80, "lon": 127.0010, "lat": 37.0030},
+    {"id": "O_SOUTH", "population": 60, "lon": 127.0020, "lat": 37.0000}
+  ],
+  "destinations": [
+    {"id": "D_CLINIC", "opportunities": 1, "lon": 127.0030, "lat": 37.0000},
+    {"id": "D_LIBRARY", "opportunities": 1, "lon": 127.0030, "lat": 37.0020},
+    {"id": "D_MARKET", "opportunities": 1, "lon": 127.0000, "lat": 37.0030}
+  ],
+  "gtfs": {
+    "agency": [
+      {"agency_id": "SYN", "agency_name": "Fictional Grid Transit", "agency_url": "https://example.invalid/", "agency_timezone": "Etc/UTC"}
+    ],
+    "stops": [
+      {"stop_id": "S_WEST", "stop_name": "West Stop", "stop_lat": 37.0010, "stop_lon": 127.0000},
+      {"stop_id": "S_CENTRAL", "stop_name": "Central Stop", "stop_lat": 37.0010, "stop_lon": 127.0010},
+      {"stop_id": "S_CIVIC", "stop_name": "Civic Stop", "stop_lat": 37.0010, "stop_lon": 127.0020},
+      {"stop_id": "S_EAST", "stop_name": "East Stop", "stop_lat": 37.0010, "stop_lon": 127.0030}
+    ],
+    "routes": [
+      {"route_id": "R1", "agency_id": "SYN", "route_short_name": "1", "route_long_name": "West-East Synthetic Line", "route_type": 3}
+    ],
+    "trips": [
+      {"route_id": "R1", "service_id": "DAILY", "trip_id": "EAST_0800", "direction_id": 0},
+      {"route_id": "R1", "service_id": "DAILY", "trip_id": "EAST_0810", "direction_id": 0},
+      {"route_id": "R1", "service_id": "DAILY", "trip_id": "WEST_0805", "direction_id": 1},
+      {"route_id": "R1", "service_id": "DAILY", "trip_id": "WEST_0815", "direction_id": 1}
+    ],
+    "stop_times": [
+      {"trip_id": "EAST_0800", "arrival_time": "08:00:00", "departure_time": "08:00:00", "stop_id": "S_WEST", "stop_sequence": 1},
+      {"trip_id": "EAST_0800", "arrival_time": "08:02:00", "departure_time": "08:02:00", "stop_id": "S_CENTRAL", "stop_sequence": 2},
+      {"trip_id": "EAST_0800", "arrival_time": "08:04:00", "departure_time": "08:04:00", "stop_id": "S_CIVIC", "stop_sequence": 3},
+      {"trip_id": "EAST_0800", "arrival_time": "08:06:00", "departure_time": "08:06:00", "stop_id": "S_EAST", "stop_sequence": 4},
+      {"trip_id": "EAST_0810", "arrival_time": "08:10:00", "departure_time": "08:10:00", "stop_id": "S_WEST", "stop_sequence": 1},
+      {"trip_id": "EAST_0810", "arrival_time": "08:12:00", "departure_time": "08:12:00", "stop_id": "S_CENTRAL", "stop_sequence": 2},
+      {"trip_id": "EAST_0810", "arrival_time": "08:14:00", "departure_time": "08:14:00", "stop_id": "S_CIVIC", "stop_sequence": 3},
+      {"trip_id": "EAST_0810", "arrival_time": "08:16:00", "departure_time": "08:16:00", "stop_id": "S_EAST", "stop_sequence": 4},
+      {"trip_id": "WEST_0805", "arrival_time": "08:05:00", "departure_time": "08:05:00", "stop_id": "S_EAST", "stop_sequence": 1},
+      {"trip_id": "WEST_0805", "arrival_time": "08:07:00", "departure_time": "08:07:00", "stop_id": "S_CIVIC", "stop_sequence": 2},
+      {"trip_id": "WEST_0805", "arrival_time": "08:09:00", "departure_time": "08:09:00", "stop_id": "S_CENTRAL", "stop_sequence": 3},
+      {"trip_id": "WEST_0805", "arrival_time": "08:11:00", "departure_time": "08:11:00", "stop_id": "S_WEST", "stop_sequence": 4},
+      {"trip_id": "WEST_0815", "arrival_time": "08:15:00", "departure_time": "08:15:00", "stop_id": "S_EAST", "stop_sequence": 1},
+      {"trip_id": "WEST_0815", "arrival_time": "08:17:00", "departure_time": "08:17:00", "stop_id": "S_CIVIC", "stop_sequence": 2},
+      {"trip_id": "WEST_0815", "arrival_time": "08:19:00", "departure_time": "08:19:00", "stop_id": "S_CENTRAL", "stop_sequence": 3},
+      {"trip_id": "WEST_0815", "arrival_time": "08:21:00", "departure_time": "08:21:00", "stop_id": "S_WEST", "stop_sequence": 4}
+    ],
+    "calendar": [
+      {"service_id": "DAILY", "monday": 1, "tuesday": 1, "wednesday": 1, "thursday": 1, "friday": 1, "saturday": 1, "sunday": 1, "start_date": "20260101", "end_date": "20301231"}
+    ]
+  }
+}

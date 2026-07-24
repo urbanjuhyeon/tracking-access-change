@@ -1,0 +1,7 @@
+metric,value
+n_districts,251
+n_bottom_quintile,50
+n_overlap,28
+n_only_car,22
+n_only_transit,22
+jaccard_similarity,0.389

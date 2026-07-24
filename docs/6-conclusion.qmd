@@ -1,0 +1,23 @@
+# Conclusion {#sec-conclusion}
+
+This book documented a workflow for tracking how accessibility changes over time, comparing **car and public transit**. The demonstration used Korean banking data, but the same approach applies wherever **GTFS feeds** and **OpenStreetMap** data exist.
+
+The workflow handles the practical challenges that arise in longitudinal analysis: cleaning GTFS feeds with **timezone or calendar errors**, managing **year-specific network data**, and scaling computations across large regions through **partitioning**. These are not glamorous problems, but they are the ones that block progress when you try to move from a single-city tutorial to a multi-year national analysis.
+
+If you want to adapt this workflow to another context, the main changes are straightforward. Replace the destination data with your service of interest: hospitals, schools, grocery stores. Adjust the **time thresholds** to match how people actually travel to those services. For transit feeds, the [Mobility Database](https://mobilitydatabase.org/) lists over 2,000 GTFS sources worldwide. The partitioning strategy may need adjustment depending on your region's administrative boundaries and computational resources.
+
+Several limitations apply. **GTFS quality varies** across agencies; feeds may contain timezone errors, invalid calendar dates, or missing route information. **OSM coverage** is generally good for road networks but may be incomplete for pedestrian paths. Car routing uses **free-flow speeds**, and transit routing assumes schedules reflect actual service. These are standard simplifications in accessibility research, appropriate for comparative analysis but not for predicting individual travel times.
+
+## Beyond Tracking: Attributing and Averting Change {#sec-beyond}
+
+Measuring *how much* access changed is only the first question. The travel-time matrices this workflow produces support a second one: *why* did it change, and how much would a rule limiting closures have saved?
+
+Because accessibility is a joint product of the facility set and the transport network, an observed change confounds the two. The extension is to route **hybrid inputs**, one year's network paired with another year's facilities, and decompose the observed change into a **service effect**, a **network effect**, and an interaction term. The same stored matrices then price **policy scenarios**. Any rule that blocks closures (for example, protecting the last branch in a neighborhood) defines a counterfactual facility set; computing its accessibility is arithmetic on matrices that already exist, with no new routing.
+
+We develop this extension in a companion paper, *Bank closures or transit cuts? Decomposing accessibility decline by counterfactual routing in South Korea*. The scripts are included in this repository: `scripts/6-1-decompose-routing.R` and the remaining `scripts/6-*` files (counterfactual routing and decomposition), `scripts/7-0-policy-pilot.R` (last-branch policy scenario), and `scripts/7-2-gtfs-verification.R`, `scripts/7-3-gtfs-slot-frequencies.R` (GTFS input verification). They consume the routing outputs described in Chapters 3–4, so a reader who has run the workflow on another region has the main inputs the decomposition needs.
+
+## Further Resources
+
+For readers looking to go further, the [r5r documentation](https://ipeagit.github.io/r5r/) covers routing options not used here, including detailed itineraries and fare-based accessibility. [Introduction to Urban Accessibility](https://ipeagit.github.io/intro_access_book/) provides a gentler introduction to the concepts. The [Helsinki Travel Time Matrix](https://www.nature.com/articles/s41597-020-0413-y) demonstrates what a mature longitudinal dataset looks like after a decade of development.
+
+The code and a license-clean synthetic example are available at [github.com/urbanjuhyeon/tracking-access-change](https://github.com/urbanjuhyeon/tracking-access-change). The original transit, census, and bank inputs are not redistributed; `NOTICE.md` lists each source and how to obtain it.

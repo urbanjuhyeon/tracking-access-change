@@ -1,0 +1,9 @@
+# Quarto build cache
+/.quarto/
+**/*.quarto_ipynb
+
+# Quarto render temp files
+*_files/
+
+# Claude settings
+.claude/

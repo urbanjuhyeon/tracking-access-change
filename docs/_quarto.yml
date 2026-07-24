@@ -1,0 +1,45 @@
+project:
+  type: book
+  resources:
+    - assets/figures/**/*.png
+
+book:
+  title: "Tracking Accessibility Over Time"
+  subtitle: "A reproducible multimodal routing workflow"
+  author: "Juhyeon Park"
+  date: "2026-07-01"
+  date-format: "MMMM YYYY"
+  repo-url: https://github.com/urbanjuhyeon/tracking-access-change
+  repo-actions: [edit, issue]
+  sidebar:
+    collapse-level: 1
+  chapters:
+    - index.qmd
+    - 1-introduction.qmd
+    - 2-data.qmd
+    - 3-routing.qmd
+    - 4-scaling.qmd
+    - 5-casestudy.qmd
+    - 6-conclusion.qmd
+
+bibliography: references.bib
+csl: sage-harvard.csl
+
+format:
+  html:
+    theme: cosmo
+    css: custom.css
+    lightbox: true
+    number-depth: 2
+    sidebar:
+      tools:
+        - icon: github
+          href: https://github.com/urbanjuhyeon/tracking-access-change
+          text: "GitHub Repository"
+
+knitr:
+  opts_chunk:
+    eval: false
+
+editor:
+  render-on-save: true

@@ -1,0 +1,96 @@
+# Introduction {#sec-introduction}
+
+**Accessibility is how easily people can reach destinations, and that ease shapes urban life.** Where you live determines whether a hospital visit takes ten minutes or an hour, whether job opportunities are within reach, whether daily errands require a car. Measuring accessibility helps researchers and planners understand spatial disparities and evaluate interventions. The tools for this work have matured: r5r enables realistic multimodal routing in R, GTFS feeds standardize transit schedules for thousands of agencies worldwide, and OpenStreetMap provides street networks across most countries.
+
+**Yet many research questions remain difficult to answer with existing resources.** When services close over several years, which communities lose access? When a new transit line opens, does it reduce or reinforce spatial inequalities? How differently do car owners and transit users experience access to the same destinations? Answering them means **tracking accessibility over time** and **comparing across transport modes**. Current tutorials demonstrate single-city, single-time-point calculations; scaling to multi-year, national-scale analysis requires integration work that existing resources do not cover.
+
+**This book provides that integration.** We present a documented, reproducible workflow for measuring how accessibility changes over time, for both car and public transit. It runs from raw GTFS and OSM data, through network construction and travel time calculation, to aggregated metrics. The pipeline is a foundation rather than a fixed product; researchers can adapt it to their own study areas, time periods, and destinations.
+
+## Pipeline Structure and Components
+
+The workflow connects four inputs to produce accessibility metrics:
+
+```{mermaid}
+%%| fig-cap: "Workflow for measuring accessibility change over time, from raw data inputs through processing to accessibility metrics"
+%%| fig-align: center
+%%{init: {'theme': 'base', 'themeVariables': { 'primaryColor': '#e8f4f8', 'primaryTextColor': '#1a1a1a', 'primaryBorderColor': '#5c9ead', 'lineColor': '#5c9ead', 'secondaryColor': '#f0f7e6', 'tertiaryColor': '#fff5e6'}}}%%
+flowchart LR
+    subgraph Input
+        D1[GTFS]
+        D2[OSM]
+        D3[Origins]
+        D4[Destinations]
+    end
+
+    subgraph Pipeline
+        P1[Network<br/>Building]
+        P2[Travel Time<br/>Calculation]
+        P3[Aggregation]
+    end
+
+    subgraph Output
+        O1[Accessibility<br/>Metrics]
+    end
+
+    D1 --> P1
+    D2 --> P1
+    P1 --> P2
+    D3 --> P2
+    D4 --> P2
+    P2 --> P3
+    P3 --> O1
+
+    style Input fill:#e8f4f8,stroke:#5c9ead
+    style Pipeline fill:#f0f7e6,stroke:#7cb342
+    style Output fill:#fff5e6,stroke:#f9a825
+```
+
+GTFS and OSM data feed into the preparation stage, which builds a routable network. Origins and destinations enter at the travel time calculation stage, producing matrices that are then aggregated into final accessibility metrics. For multi-year analysis, this sequence repeats for each time period. The remaining chapters walk through each stage:
+
+- **Data** (@sec-data): Gather and standardize GTFS transit schedules, OSM street networks, origin points (census units), and destination locations. For multi-year analysis, this means organizing data by time period and ensuring consistent formatting.
+
+- **Routing** (@sec-routing): Build multimodal routing graphs using r5r. Validate that transit routes and street networks load correctly and cover the study area. Compute origin-destination travel time matrices for each transport mode.
+
+- **Scaling** (@sec-scaling): For large study areas, partition the analysis spatially (e.g., by district) and process in parallel. Manage memory constraints and handle failures gracefully.
+
+- **Case Study** (@sec-casestudy): Apply the workflow to banking accessibility in South Korea, combining results across partitions and visualizing accessibility patterns.
+
+## Existing Resources and Their Scope
+
+Several resources support accessibility research, each with a specific focus:
+
+- **R5** [@conwayEvidenceBasedTransitLand2017]: Conveyal's routing engine for multimodal transport analysis. Calculates realistic travel times using GTFS schedules and OpenStreetMap networks. Powerful but requires Java expertise to use directly.
+
+- **r5r and r5py** [@pereiraR5rRapidRealistic2021; @finkR5pyRapidRealistic2022]: R and Python wrappers that make R5 accessible to researchers. Handle network construction and routing with simple function calls. Each analysis operates on a single network at one point in time.
+
+- **Introduction to Urban Accessibility** [@pereiraIntroductionUrbanAccessibility2023]: A primer on accessibility concepts and r5r usage. Demonstrates calculations for a single city at one point in time; does not cover multi-year data management or scaling beyond a metropolitan area.
+
+- **Helsinki Region Travel Time Matrix** [@tenkanenLongitudinalSpatialDataset2020]: Travel times across the Helsinki region for 2013, 2015, 2018, and 2023, covering walking, cycling, transit, and car. Provides both the dataset and a Docker-based workflow using r5py with Helsinki-specific components (speed annotators, parking calculators). An excellent model for metropolitan-scale longitudinal analysis; adapting to other regions requires replacing these localized components.
+
+These resources form a solid foundation for accessibility research. **Combining them for multi-year, multimodal analysis remains underdocumented.** This book addresses that gap, presenting one workflow that researchers can follow and adapt.
+
+## Demonstration: Banking Access in South Korea
+
+**The workflow applies wherever GTFS and OSM data exist.** The case study in this book, banking accessibility in South Korea, is a demonstration rather than the contribution; the contribution is the documented pipeline that other researchers can adapt. The same structure supports many applications:
+
+| Component | This Study | Other Applications |
+|-----------|------------|-------------------|
+| Destinations | Bank branches (~6,000) | Hospitals, schools, jobs, grocery stores |
+| Origins | Census enumeration districts (~100,000) | Grid cells, building centroids, custom zones |
+| Geography | South Korea (national) | Any region with GTFS/OSM coverage |
+| Time periods | 2021–2024, annual snapshots | Historical archives, future scenarios |
+| Modes | Car, transit, walk, bicycle | Other modes and combinations |
+
+::: {.callout-note collapse="true"}
+## Why banking in South Korea?
+
+Bank branch closures have created **"banking deserts"** worldwide, leaving rural, elderly, and low-income populations without convenient access to in-person services [@barcaUSBankBranch2024; @clarkRetailBankingClosures2024].
+
+South Korea is no exception. Financial Services Commission figures show a **24% fall over a decade**, from 7,673 branches (2012) to 5,800 (2022). Yet **53.8% of those over 70** still use branches as their primary banking channel, more than double the national average [@financialservicescommissionBankBranchClosure2023].
+
+A recent study on this issue used Delaunay triangulation to measure distances to the nearest branch and found that the worst-served areas face journeys **exceeding 20 km**, concentrated in rapidly aging rural regions [@leeAnalysisDomesticBank2024]. But straight-line distance tells only part of the story: it ignores road networks, transit availability, and how travel burdens differ between car owners and those who rely on public transport.
+:::
+
+The next chapter begins where every application begins: assembling and standardizing the four inputs.
+
+## References {.unnumbered .unlisted}
