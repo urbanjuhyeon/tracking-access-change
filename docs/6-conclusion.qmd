@@ -14,7 +14,15 @@ Measuring *how much* access changed is only the first question. The travel-time 
 
 Because accessibility is a joint product of the facility set and the transport network, an observed change confounds the two. The extension routes **hybrid inputs** by pairing one year's network with another year's facilities. It then decomposes the observed change into a **service effect**, a **network effect**, and an interaction term. The same stored matrices can evaluate **policy scenarios**. A rule that limits closures, such as protecting the last branch in a neighborhood, defines a counterfactual facility set. Computing its accessibility requires only arithmetic on matrices that already exist, with no new routing.
 
-We develop this extension in a companion paper, *Bank closures or transit cuts? Decomposing accessibility decline by counterfactual routing in South Korea*. The `scripts/6-*` files cover counterfactual routing and decomposition, beginning with `scripts/6-1-decompose-routing.R`. `scripts/7-0-policy-pilot.R` implements the last-branch policy scenario. The GTFS verification scripts are `scripts/7-2-gtfs-verification.R` and `scripts/7-3-gtfs-slot-frequencies.R`. These scripts consume the routing outputs described in Chapters 3–4. A reader who has run the workflow on another region therefore has the main inputs needed for decomposition.
+::: {.content-visible unless-profile="anonymous"}
+We develop this extension in a companion paper, *Bank closures or transit cuts? Decomposing accessibility decline by counterfactual routing in South Korea*.
+:::
+
+::: {.content-visible when-profile="anonymous"}
+We develop this extension in a companion paper under review.
+:::
+
+The `scripts/6-*` files cover counterfactual routing and decomposition, beginning with `scripts/6-1-decompose-routing.R`. `scripts/7-0-policy-pilot.R` implements the last-branch policy scenario. The GTFS verification scripts are `scripts/7-2-gtfs-verification.R` and `scripts/7-3-gtfs-slot-frequencies.R`. These scripts consume the routing outputs described in Chapters 3–4. A reader who has run the workflow on another region therefore has the main inputs needed for decomposition.
 
 ## Further Resources
 

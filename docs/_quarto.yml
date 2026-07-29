@@ -3,15 +3,14 @@ project:
   resources:
     - assets/figures/**/*.png
 
+profile:
+  default: public
+  group:
+    - [public, anonymous]
+
 book:
   title: "Tracking Accessibility Over Time"
   subtitle: "A reproducible multimodal routing workflow"
-  author: "Juhyeon Park"
-  date: "2026-07-01"
-  date-format: "MMMM YYYY"
-  repo-url: https://github.com/urbanjuhyeon/tracking-access-change
-  repo-subdir: docs
-  repo-actions: [edit, issue]
   sidebar:
     collapse-level: 1
   chapters:
@@ -32,11 +31,6 @@ format:
     css: custom.css
     lightbox: true
     number-depth: 2
-    sidebar:
-      tools:
-        - icon: github
-          href: https://github.com/urbanjuhyeon/tracking-access-change
-          text: "GitHub Repository"
 
 knitr:
   opts_chunk:
