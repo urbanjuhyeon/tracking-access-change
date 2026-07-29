@@ -1,0 +1,18 @@
+project:
+  output-dir: _book-anonymous
+
+book:
+  title: "Tracking Urban Accessibility Across Transport Modes"
+  subtitle: "A reproducible multimodal routing workflow"
+  author: "Anonymous"
+  date: "2026-07-01"
+  date-format: "MMMM YYYY"
+  repo-url: https://anonymous.4open.science/r/longitudinal-multimodal-access-8B61
+
+filters:
+  - ../anonymous-review/anonymize.lua
+
+format:
+  html:
+    include-in-header:
+      - ../anonymous-review/noindex.html

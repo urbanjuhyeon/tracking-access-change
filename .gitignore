@@ -10,6 +10,7 @@ infrastructure/
 # Quarto build outputs and caches
 /.quarto/
 docs/_book/
+docs/_book-anonymous/
 docs/.quarto/
 *_files/
 
@@ -27,6 +28,7 @@ __pycache__/
 .env
 .env.*
 !.env.example
+.netlify/
 
 # Local-only trees
 .claude/
