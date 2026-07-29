@@ -1,6 +1,6 @@
 # Introduction {#sec-introduction}
 
-**Accessibility is how easily people can reach destinations, and that ease shapes urban life.** Where you live determines whether a hospital visit takes ten minutes or an hour, whether job opportunities are within reach, whether daily errands require a car. Measuring accessibility helps researchers and planners understand spatial disparities and evaluate interventions. The tools for this work have matured: r5r enables realistic multimodal routing in R, GTFS feeds standardize transit schedules for thousands of agencies worldwide, and OpenStreetMap provides street networks across most countries.
+**Accessibility is how easily people can reach destinations, and that ease shapes urban life.** A hospital may be ten minutes from one neighborhood and an hour from another. Job opportunities and daily errands may be within reach only by car. Measuring accessibility helps researchers and planners understand spatial disparities and evaluate interventions. The tools for this work have matured. r5r enables realistic multimodal routing in R. GTFS feeds standardize transit schedules for thousands of agencies worldwide, while OpenStreetMap provides street networks across most countries.
 
 **Yet many research questions remain difficult to answer with existing resources.** When services close over several years, which communities lose access? When a new transit line opens, does it reduce or reinforce spatial inequalities? How differently do car owners and transit users experience access to the same destinations? Answering them means **tracking accessibility over time** and **comparing across transport modes**. Current tutorials demonstrate single-city, single-time-point calculations; scaling to multi-year, national-scale analysis requires integration work that existing resources do not cover.
 
@@ -88,7 +88,7 @@ Bank branch closures have created **"banking deserts"** worldwide, leaving rural
 
 South Korea is no exception. Financial Services Commission figures show a **24% fall over a decade**, from 7,673 branches (2012) to 5,800 (2022). Yet **53.8% of those over 70** still use branches as their primary banking channel, more than double the national average [@financialservicescommissionBankBranchClosure2023].
 
-A recent study on this issue used Delaunay triangulation to measure distances to the nearest branch and found that the worst-served areas face journeys **exceeding 20 km**, concentrated in rapidly aging rural regions [@leeAnalysisDomesticBank2024]. But straight-line distance tells only part of the story: it ignores road networks, transit availability, and how travel burdens differ between car owners and those who rely on public transport.
+A recent study used Delaunay triangulation to measure distances to the nearest branch [@leeAnalysisDomesticBank2024]. The worst-served areas faced journeys **exceeding 20 km** and were concentrated in rapidly aging rural regions. But straight-line distance tells only part of the story: it ignores road networks, transit availability, and how travel burdens differ between car owners and those who rely on public transport.
 :::
 
 The next chapter begins where every application begins: assembling and standardizing the four inputs.

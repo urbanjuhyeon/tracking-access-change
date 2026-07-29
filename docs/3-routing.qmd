@@ -81,12 +81,12 @@ pilot/
     └── osm.pbf              # Street network
 ```
 
-The pilot inputs are derived from licensed sources (KTDB GTFS, SGIS boundaries, geocoded bank branches), so we do not redistribute them; `NOTICE.md` in the repository lists each source and how to obtain it. Every output shown in this chapter was produced from this real dataset.
+The pilot inputs are derived from licensed sources: KTDB GTFS, SGIS boundaries, and geocoded bank branches. We therefore do not redistribute them. `NOTICE.md` lists each source and explains how to obtain it. Every output shown in this chapter was produced from this real dataset.
 
 ::: {.callout-tip}
 ## Reproduce this yourself
 
-The repository ships a license-clean synthetic fixture, [`samples/tutorial-synthetic/`](https://github.com/urbanjuhyeon/tracking-access-change/tree/main/samples/tutorial-synthetic): a fictional 7 × 7 street grid with a four-stop bus route, three origins, and three destinations. Generate it with `python samples/tutorial-synthetic/generate_fixture.py`, then run its `run_example.R` to exercise the same `build_network()` → `travel_time_matrix()` path on open data. To follow this chapter with real inputs, prepare your own study area as described in @sec-data.
+The repository ships a license-clean synthetic fixture in [`samples/tutorial-synthetic/`](https://github.com/urbanjuhyeon/tracking-access-change/tree/main/samples/tutorial-synthetic). It contains a fictional 7 × 7 street grid with a four-stop bus route, three origins, and three destinations. Generate it with `python samples/tutorial-synthetic/generate_fixture.py`. Then run `run_example.R` to exercise the same `build_network()` → `travel_time_matrix()` path on open data. To follow this chapter with real inputs, prepare your own study area as described in @sec-data.
 :::
 
 ::: {.callout-note collapse="true"}
@@ -169,7 +169,7 @@ For **Walk**, the default speed is 3.6 km/h, configurable via `walk_speed` if yo
 
 For **Bicycle**, `bike_speed = 12` km/h is a conservative estimate suitable for general population studies. Commercial navigation apps typically use 15--18 km/h, targeting active cyclists.
 
-The `max_lts` (Level of Traffic Stress) parameter controls which roads are accessible: LTS 1 includes only bike lanes and quiet residential streets, LTS 2 (default) adds collector roads with bike infrastructure, LTS 3 includes tertiary and unclassified roads, and LTS 4 allows all roads including arterials. We use the default `max_lts = 2`, which represents routes tolerable for the mainstream adult population, a standard assumption in cycling accessibility research. Researchers studying regions with limited cycling infrastructure may consider `max_lts = 3` to include more road types, though this increases estimated accessibility.
+The `max_lts` (Level of Traffic Stress) parameter controls which roads are accessible. LTS 1 includes only bike lanes and quiet residential streets; LTS 2 (default) adds collector roads with bike infrastructure. LTS 3 includes tertiary and unclassified roads, while LTS 4 allows all roads, including arterials. We use the default `max_lts = 2`, which represents routes tolerable for the mainstream adult population, a standard assumption in cycling accessibility research. Researchers studying regions with limited cycling infrastructure may consider `max_lts = 3` to include more road types, though this increases estimated accessibility.
 
 ::: {.callout-note collapse="true"}
 ## Troubleshooting
@@ -460,7 +460,7 @@ To validate r5r results, we compared against a commercial map API (Naver Maps). 
 | Walk | 23.2 min | 23 min | +0.2 |
 | Bicycle | 15.2 min | 6 min | +9.2 |
 
-Car, transit, and walk results match within 1--2 minutes. The bicycle difference (15.2 vs 6 min) reflects two factors: r5r uses 12 km/h (conservative) while commercial apps use 15--18 km/h, and our LTS=2 restriction routes cyclists onto safer but longer paths. Commercial apps typically optimize for speed on any road.
+Car, transit, and walk results match within 1--2 minutes. Two settings account for much of the bicycle difference (15.2 vs 6 min). r5r uses 12 km/h, while commercial apps typically use 15--18 km/h. Our LTS=2 restriction also routes cyclists onto safer but longer paths, whereas commercial apps typically optimize for speed on any road.
 
 ![Car: 4 min](assets/figures/ch3/screenshot_station_to_library_car.png)
 
@@ -744,7 +744,7 @@ ggsave("travel_time_matrix.png", ttm_map, width = 8, height = 8, dpi = 300, bg =
 
 ![Travel time to Suwon Station by four modes](assets/figures/ch3/travel_time_matrix.png)
 
-The maps use `cut_number()` to create quantile-based bins with equal counts per category. Transit, walk, and bicycle show concentric patterns radiating from Suwon Station: travel time increases with distance from the destination. Car shows a different pattern: the fastest times appear along major arterial roads (near City Hall and commercial districts) rather than simply near the station. This reflects how r5r calculates car travel times using free-flow speeds derived from OSM road classifications. Areas with good access to primary and secondary roads can reach the station faster than nearby areas served only by narrow local streets or one-way networks.
+The maps use `cut_number()` to create quantile-based bins with equal counts per category. Transit, walk, and bicycle show concentric patterns radiating from Suwon Station: travel time increases with distance from the destination. Car shows a different pattern: the fastest times appear along major arterial roads (near City Hall and commercial districts) rather than simply near the station. This pattern follows from r5r's use of free-flow speeds derived from OSM road classifications. Areas with good access to primary and secondary roads can reach the station faster than nearby areas served only by narrow local streets or one-way networks.
 
 The `*` and `^` markers highlight tracts with the largest modal gap, where car has the biggest advantage over transit. These peripheral locations have infrequent or circuitous bus service; as the map note shows, their transit trips take about seven times longer than driving.
 
@@ -895,7 +895,7 @@ ggsave("accessibility_map.png", access_map, width = 8, height = 8, dpi = 300, bg
 
 ![Restaurants reachable from each census tract](assets/figures/ch3/accessibility_map.png)
 
-Car accessibility (10-min cutoff) follows restaurant density: high values appear along commercial corridors where destinations cluster. Transit accessibility (20-min cutoff) shows a different pattern: high values concentrate near transit hubs regardless of where restaurants are located, while peripheral areas with infrequent bus service show near-zero accessibility. Walk and bicycle accessibility strongly reflect local restaurant density, with bicycle covering a larger catchment area. In short: car and bicycle accessibility reflect where destinations are; transit accessibility reflects where the network goes.
+Car accessibility (10-min cutoff) follows restaurant density: high values appear along commercial corridors where destinations cluster. Transit accessibility (20-min cutoff) shows a different pattern: high values concentrate near transit hubs regardless of where restaurants are located, while peripheral areas with infrequent bus service show near-zero accessibility. Walk and bicycle accessibility strongly reflect local restaurant density, with bicycle covering a larger catchment area. Car and bicycle accessibility reflect where destinations are; transit accessibility reflects where the network goes.
 
 
 ## Cleanup {.unnumbered}

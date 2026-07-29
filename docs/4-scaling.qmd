@@ -1,6 +1,6 @@
 # Scaling {#sec-scaling}
 
-Scaling extends routing from a single district to **national coverage**. A country-wide network exceeds typical RAM: millions of stops and road segments cannot be processed at once. The solution is to partition national data into district-level packages, route each independently, then merge results: the **split-apply-combine** pattern.
+Scaling extends routing from a single district to **national coverage**. A country-wide network exceeds typical RAM because millions of stops and road segments cannot be processed at once. We therefore partition national data into district-level packages, route each independently, and merge the results through the **split-apply-combine** pattern.
 
 ```{mermaid}
 %%| fig-cap: "Split-apply-combine: partition data, route in parallel, merge results"
@@ -34,7 +34,7 @@ This section is conceptual: partitioning requires full national GTFS/OSM prepare
 
 ### Why Partition?
 
-r5r loads the entire network into **Java heap memory**. A national network, with millions of transit stops and road segments, exceeds typical RAM limits. The solution: partition national data into smaller units that each fit in memory.
+r5r loads the entire network into **Java heap memory**. A national network, with millions of transit stops and road segments, exceeds typical RAM limits. Partitioning the data produces smaller units that each fit in memory.
 
 We partition by **administrative district**: Si/Gun/Gu in Korea (252 units), counties in the US (~3,000), or local authorities in the UK (~300). This choice balances three concerns:
 
@@ -362,7 +362,7 @@ message(glue("\n\nDone! {length(TARGET_YEARS)} years × ",
 
 ## Sample Data {#sec-sample-data}
 
-The partitioning code in @sec-partitioning produces district packages. The rest of this chapter walks through the workflow on our pre-built sample: 2023 network data for five districts representing diverse urban contexts, from dense metropolitan centers to rural counties. Like the national inputs, the sample embeds licensed data (KTDB GTFS, SGIS boundaries, geocoded bank branches), so we do not redistribute it; every output below is shown as illustration from this real dataset. For a runnable, license-clean starting point, generate the synthetic fixture in [`samples/tutorial-synthetic/`](https://github.com/urbanjuhyeon/tracking-access-change/tree/main/samples/tutorial-synthetic), then apply the code in this section to district packages you prepare for your own study area.
+The partitioning code in @sec-partitioning produces district packages. The rest of this chapter uses a pre-built sample with 2023 network data for five districts. These districts range from dense metropolitan centers to rural counties. Like the national inputs, the sample embeds licensed data: KTDB GTFS, SGIS boundaries, and geocoded bank branches. We therefore do not redistribute it. Every output below comes from this real dataset and is shown for illustration. For a runnable, license-clean starting point, generate the synthetic fixture in [`samples/tutorial-synthetic/`](https://github.com/urbanjuhyeon/tracking-access-change/tree/main/samples/tutorial-synthetic). Then apply the code in this section to district packages prepared for your own study area.
 
 ### Setup
 
@@ -599,7 +599,7 @@ DISTRICT_CODES <- c("26010", "32010", "32030", "38600", "39010")
 ::: {.callout-note}
 ## Time-variant vs. time-invariant modes
 
-**Transit** routing depends on schedules: a trip at 8:00 AM may take 25 minutes, but the same trip at 8:05 could take 40 minutes if you just missed a bus. r5r's `time_window` parameter addresses this by simulating multiple departures and returning the median travel time.
+**Transit** routing depends on schedules. A trip at 8:00 AM may take 25 minutes, while the same trip at 8:05 could take 40 minutes after a missed bus. r5r's `time_window` parameter captures this variation by simulating multiple departures and returning the median travel time.
 
 **Car, Walk, and Bicycle** are time-invariant: travel time depends only on distance and speed, not schedules. For these modes, we use a single departure time (typically 12:00) with `time_window = 1`.
 :::
@@ -804,7 +804,7 @@ Processing: 32010
 ::: {.callout-note collapse="true"}
 ## Parallel processing for larger runs
 
-For the full national analysis (252 districts), parallel processing dramatically reduces runtime. The `{future}` and `{furrr}` packages distribute work across multiple CPU cores:
+For the full national analysis (252 districts), parallel processing reduces runtime by distributing work across CPU cores with the `{future}` and `{furrr}` packages:
 
 ```{r}
 #| label: parallel-routing
@@ -913,7 +913,7 @@ ttm |> head(4) |> collect()
 
 #### Fixing Column Swap
 
-r5r may swap `from_id` and `to_id` columns for Walk and Bicycle modes when origins outnumber destinations (a reverse search optimization). The swap can differ **by district within the same mode**: in our sample, Hapcheon has fewer origins (84) than buffer destinations (94), so its Walk and Bicycle results are not swapped while the other four districts' are. We therefore detect and correct per mode **and** district:
+r5r may swap `from_id` and `to_id` columns for Walk and Bicycle modes when origins outnumber destinations (a reverse search optimization). The swap can differ **by district within the same mode**. In our sample, Hapcheon has fewer origins (84) than buffer destinations (94), so its Walk and Bicycle results are not swapped. The other four districts' results are swapped. We therefore detect and correct per mode **and** district:
 
 ```{r}
 #| label: fix-swap
@@ -939,7 +939,7 @@ The function checks if the first `from_id` in each mode-district group exists in
 
 ### Counting Reachable Destinations
 
-Now we count destinations reachable within each time threshold. Transit has three rows per origin-destination pair (one per departure slot), so we count per slot first and then average the slots; the other modes have a single (missing) `departure_time` value and pass through unchanged:
+Now we count destinations reachable within each time threshold. Transit has three rows per origin-destination pair, one for each departure slot. We count each slot first and then average them. The other modes have a single missing `departure_time` value and pass through unchanged:
 
 ```{r}
 #| label: compute-accessibility
@@ -973,7 +973,7 @@ head(accessibility)
 6 26010510010002 car      112      128
 ```
 
-Each row represents one census tract's accessibility for one mode. Reading the first four rows: tract `26010510010001` in Ulsan Jung-gu can reach 105 banks within 15 minutes by car, but only 4 by bicycle, 1 on foot, and 9.33 by transit. The decimal transit values reflect the averaging across three departure times (08:00, 12:00, 18:00); transit accessibility varies by time of day. We use 15 minutes as the "neighborhood" threshold and 30 minutes as "accessible", intuitive thresholds for banking services. This **cumulative opportunities** measure is simple to interpret and widely used in accessibility research.
+Each row represents one census tract's accessibility for one mode. For example, tract `26010510010001` in Ulsan Jung-gu can reach 105 banks within 15 minutes by car. It can reach only 4 by bicycle, 1 on foot, and 9.33 by transit. The decimal transit values reflect the average across three departure times (08:00, 12:00, 18:00); transit accessibility varies by time of day. We use 15 minutes as the "neighborhood" threshold and 30 minutes as "accessible", intuitive thresholds for banking services. This **cumulative opportunities** measure is simple to interpret and widely used in accessibility research.
 
 ### Population-Weighted Aggregation
 
@@ -982,11 +982,11 @@ Census tracts vary widely in population: some have thousands of residents, other
 ::: {.callout-note collapse="true"}
 ## Addressing the Modifiable Areal Unit Problem (MAUP)
 
-Accessibility results can change depending on which spatial units are used for analysis, a well-known issue called the Modifiable Areal Unit Problem (MAUP). Our approach mitigates this in two ways:
+Accessibility results can change depending on which spatial units are used for analysis, a well-known issue called the Modifiable Areal Unit Problem (MAUP). We reduce, but do not remove, this sensitivity in two ways:
 
 1. **Compute at finest resolution**: We calculate accessibility at census tract centroids (~100,000 units nationally), the smallest available spatial unit. This preserves spatial detail before any aggregation.
 
-2. **Population-weighted aggregation**: When summarizing to districts, we weight by population rather than averaging across tracts. This ensures results reflect where people actually live, not arbitrary administrative boundaries.
+2. **Population-weighted aggregation**: When summarizing to districts, we weight by population rather than averaging across tracts. This makes the district summaries reflect population distribution instead of giving every tract equal weight.
 
 The centroid assumption introduces some error: residents are distributed across the tract, not concentrated at one point. This matters more for large rural tracts than compact urban ones.
 :::
@@ -1067,7 +1067,7 @@ district_summary
 The chart compares accessibility across five districts at 15-minute and 30-minute thresholds. Four patterns stand out:
 
 - **Car dominance**: Car provides the highest accessibility everywhere: 102 banks in 15 min for Ulsan Jung-gu (metropolitan downtown) vs. 1 for Hapcheon (rural county with population under 40,000)
-- **Time sensitivity**: Extending from 15 to 30 minutes sharply increases transit accessibility in urban areas (Ulsan Jung-gu: 4 → 54), but has minimal effect in rural areas (Hapcheon: 0.5 → 0.7)
+- **Time sensitivity**: Extending from 15 to 30 minutes sharply increases transit accessibility in urban areas (Ulsan Jung-gu: 4 → 54). The increase is minimal in rural areas (Hapcheon: 0.5 → 0.7)
 - **Urban-rural gap**: At 30 min, Ulsan Jung-gu residents reach 128 banks by car while Hapcheon reaches only 5
 - **Active modes plateau**: Walking and cycling show modest gains (Ulsan Jung-gu walk: 2 → 6), reflecting physical distance limits
 :::

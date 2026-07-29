@@ -2,11 +2,11 @@
 
 The previous chapters built a workflow: data preparation (@sec-data), routing functions (@sec-routing), and scaling strategies (@sec-scaling). This chapter applies that workflow to a real question: **how has access to banks changed** as branches close across South Korea?
 
-We analyze **about 100,000 census tracts** over **four years** (2021–2024), comparing car and transit. The results illustrate what the workflow can produce, and the kinds of patterns that multi-year, multimodal analysis reveals.
+We analyze **about 100,000 census tracts** over **four years** (2021–2024), comparing car and transit. The results illustrate the workflow's outputs and the patterns available from multi-year, multimodal analysis.
 
 ## The Decline in Bank Branches
 
-Bank branches in South Korea have been closing steadily, the trend that motivates this analysis. The country had 6,563 branches in early 2019; by early 2025, only 5,434 remained, a **17% decline** over six years. The dark bars in the figure mark the four year-end branch snapshots (2020–2023) we analyze below; each is paired with the following March's transit and road networks, which is why we label the analysis years 2021–2024.
+Bank branches in South Korea have been closing steadily, the trend that motivates this analysis. The country had 6,563 branches in early 2019; by early 2025, only 5,434 remained, a **17% decline** over six years. The dark bars in the figure mark the four year-end branch snapshots (2020–2023) analyzed below. Each snapshot is paired with the following March's transit and road networks, so we label the analysis years 2021–2024.
 
 ![](assets/figures/ch5/fig_q1_national.png)
 
@@ -44,11 +44,11 @@ We computed the same metrics for four years, 2021 through 2024, to see how they 
 
 ![](assets/figures/ch5/fig_q3_trend.png)
 
-Population with access held steady: car at 92–93%, transit dipping slightly from 89% to 88%. But **median banks reachable fell each year**: from 58 to 47 for car (−19%), from 27 to 18 for transit (−33%). Most people still have *some* access because closures targeted redundant locations; but they have **fewer options** to choose from.
+Population with access held steady: car at 92–93%, transit dipping slightly from 89% to 88%. But **median banks reachable fell each year**: from 58 to 47 for car (−19%), from 27 to 18 for transit (−33%). This pattern is consistent with closures occurring where nearby alternatives remained. Most people retained *some* access but had **fewer options** to choose from.
 
 ## Where Access Declined
 
-The national trends above used medians, which smooth over regional anomalies. For district-level analysis, we restrict to 2021–2023: the 2024 GTFS for Busan showed abnormally short trip durations, and such errors distort spatial comparisons even if they wash out in national aggregates.
+The national trends above used medians, which smooth over regional anomalies. For district-level analysis, we restrict the period to 2021–2023. The 2024 GTFS for Busan showed abnormally short trip durations, and such errors distort spatial comparisons even when they have less influence on national aggregates.
 
 We compare three decline patterns at the district level: branch closures, change in banks reachable by transit within 30 minutes (absolute), and the same as a percentage. Each map highlights the bottom 20% of districts.
 
@@ -60,7 +60,7 @@ The three panels show different stories:
 -   **Panel (b)**: Absolute decline clusters in Seoul and Busan. Dense transit networks meant residents could reach many banks; losing some still left options, but the drop in raw numbers was large.
 -   **Panel (c)**: Relative decline hits peripheral districts. With few banks reachable to begin with, even one or two closures translate to double-digit percentage drops.
 
-The mismatch matters: most districts in (a) do not appear in (b) or (c). Bank closures **reduced choice** in cities; they **reduced access** in rural areas.
+The mismatch matters: most districts in (a) do not appear in (b) or (c). Urban districts more often show large losses in reachable options, while rural districts more often show large percentage losses.
 
 ## Where Modes Differ
 
@@ -85,9 +85,9 @@ Do declines correlate with demographics? We look at two variables: share of resi
 
 Two patterns stand out:
 
--   **Elderly share** (panels a, b): Districts with more elderly saw *smaller* declines. This seems counterintuitive, but it reflects a floor effect: these areas had few banks to begin with.
+-   **Elderly share** (panels a, b): Districts with more elderly saw *smaller* declines. This pattern is consistent with a floor effect: these areas had few banks to begin with.
 -   **Population density** (panels c, d): Denser districts lost more. Urban branches consolidated; rural areas had little left to lose.
 
-Transit correlations are stronger than car. People who depend on transit, often elderly and often in less dense areas, **started with worse access** and continue to fall behind.
+Transit correlations are stronger than car correlations. Higher population density is associated with larger declines, especially for transit, while higher elderly share is associated with smaller declines.
 
 These results measure how much access changed, where, and for whom. They stop short of a further question: how much of the change came from the closures themselves, and how much from the transit network changing underneath? Answering it requires counterfactual routing, which we develop in a companion paper and summarize in @sec-beyond.

@@ -30,7 +30,7 @@ GTFS (General Transit Feed Specification) provides transit schedules for public 
 ::: {.callout-tip collapse="true"}
 ## GTFS Structure
 
-GTFS uses [interconnected text files](https://gtfs.org/getting-started/features/base/) linked by IDs: `stops.txt` lists station locations, `routes.txt` defines transit lines, `trips.txt` describes individual journeys, `stop_times.txt` specifies arrival/departure times, and `calendar.txt` indicates service days.
+GTFS uses [interconnected text files](https://gtfs.org/getting-started/features/base/) linked by IDs. `stops.txt` lists station locations, and `routes.txt` defines transit lines. The remaining files describe individual journeys (`trips.txt`), arrival and departure times (`stop_times.txt`), and service days (`calendar.txt`).
 
 You don't need to master every field; r5r handles the parsing. But knowing the structure helps when debugging or validating data. For details, see the [official GTFS documentation](https://gtfs.org/getting-started/features/overview/).
 :::
@@ -56,7 +56,7 @@ Preparing GTFS for r5r routing involves three steps:
 
 The Korea Transport Database ([KTDB](https://www.ktdb.go.kr/)) provides national GTFS covering all transit modes (buses, urban rail, intercity, KTX, ferries). KTDB releases annual snapshots based on a typical March weekday. Historical data became available in November 2023; as of December 2025, feeds cover 2021–2024.
 
-To download, go to Information Disclosure → Data Request → Transport Analysis Data. In the selection form, pick Network → Public transit under Step 1, Nationwide under Step 2, and the distribution year under Step 3; the public-transit network is what KTDB distributes as GTFS. The site is Korean only, so use a browser translator to match these menu names and complete the request form.
+To download, go to Information Disclosure → Data Request → Transport Analysis Data. In the selection form, pick Network → Public transit under Step 1 and Nationwide under Step 2. Select the distribution year under Step 3. KTDB distributes this public-transit network as GTFS. The site is Korean only, so use a browser translator to match these menu names and complete the request form.
 :::
 
 ### Clean
@@ -128,7 +128,7 @@ write_csv(routes, "routes.txt")
 
 #### Update related tables
 
-Routes were filtered, so dependent tables need updating too. The cascade flows downward from routes: use `semi_join()` to keep only trips on remaining routes, then stop_times for those trips, then stops that still appear. (This is the reverse of spatial clipping, which starts from stops and flows upward.)
+Routes were filtered, so dependent tables need updating too. Start with `semi_join()` to keep only trips on the remaining routes. Then retain stop times for those trips and stops that still appear. This cascade is the reverse of spatial clipping, which starts from stops and flows upward.
 
 ```{r}
 #| label: gtfs-clean-cascade
@@ -158,7 +158,7 @@ Clipping also requires a spatial buffer. Residents near the boundary may access 
 
 #### How to clip GTFS
 
-Clipping GTFS requires more than filtering `stops.txt` by coordinates. The tables are linked by IDs, so filtering must cascade: start with stops inside your bounding box (administrative boundary plus buffer), then keep only `stop_times` that reference those stops, only `trips` that appear in those stop_times, and only `routes` that those trips belong to.
+Clipping GTFS requires more than filtering `stops.txt` by coordinates. The tables are linked by IDs, so filtering must cascade. Start with stops inside your bounding box (administrative boundary plus buffer). Then keep the stop times that reference those stops, the trips that appear in those stop times, and the routes that contain those trips.
 
 ```{mermaid}
 %%| fig-cap: "GTFS clipping cascade: filter stops spatially, then propagate through related tables"

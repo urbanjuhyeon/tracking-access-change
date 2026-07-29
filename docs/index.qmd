@@ -4,13 +4,13 @@ This project began with a closure notice at a neighborhood bank ([see photo](ass
 
 The branch had been there for years. When it closed, the notice directed customers to the branch it had merged with, about ten minutes away on foot. A direct bus existed, but the connection was not obvious, and for someone less mobile, that journey would be a real barrier.
 
-At first, I thought this was a local inconvenience. Then I looked into it. South Korea's bank branches have been [declining for **six consecutive years**](https://www.koreaherald.com/article/10497026), down to 5,792 by the end of 2024, and the five largest banks closed another 76 in the first quarter of 2025 alone. This was not a neighborhood problem; it was a national pattern.
+At first, I thought this was a local inconvenience. Then I looked into it. South Korea's bank branches have been [declining for **six consecutive years**](https://www.koreaherald.com/article/10497026), reaching 5,792 by the end of 2024. The five largest banks closed another 76 in the first quarter of 2025 alone. This was not a neighborhood problem; it was a national pattern.
 
 That raised questions I could not easily answer. As branches disappear over time, **where does accessibility decline the most?** Are certain kinds of areas disproportionately affected, such as rural regions, lower-income neighborhoods, or aging communities? And how different is the picture for those who drive versus those who rely on public transit?
 
 Most accessibility research captures a single point in time or focuses on one transport mode. When I went looking for methods to answer these questions, I found that longitudinal, multimodal analysis remains rare.
 
-So I built a workflow to fill that gap, and later wrote a paper that asks what caused the decline the workflow measures.
+So I built a workflow to fill that gap, and later wrote a paper that asks what produced the decline measured by the workflow.
 
 ## What This Book Offers
 
